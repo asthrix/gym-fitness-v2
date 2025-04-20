@@ -5,15 +5,15 @@ import { Calendar, Clock, User, Users } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { fitnessClasses } from "@/data/mockClasses";
 
 interface ClassPageProps {
-   params: {
-      id: string;
-   };
+   params: Promise<{ id: string }>;
 }
 
-export const generateMetadata = ({ params }: ClassPageProps) => {
-   const fitnessClass = classesData.getClassById(params.id);
+export const generateMetadata = async ({ params }: ClassPageProps) => {
+   const fitnessClassId = await params;
+   const fitnessClass = classesData.getClassById(fitnessClassId.id);
 
    if (!fitnessClass) {
       return {
@@ -27,8 +27,9 @@ export const generateMetadata = ({ params }: ClassPageProps) => {
    };
 };
 
-export default function ClassPage({ params }: ClassPageProps) {
-   const fitnessClass = classesData.getClassById(params.id);
+export default async function ClassPage({ params }: ClassPageProps) {
+   const fitnessClassId = await params;
+   const fitnessClass = classesData.getClassById(fitnessClassId.id);
 
    if (!fitnessClass) {
       notFound();

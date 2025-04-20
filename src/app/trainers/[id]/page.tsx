@@ -8,13 +8,12 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 interface TrainerPageProps {
-   params: {
-      id: string;
-   };
+   params: Promise<{ id: string }>;
 }
 
-export const generateMetadata = ({ params }: TrainerPageProps) => {
-   const trainer = trainersData.getTrainerById(params.id);
+export const generateMetadata = async ({ params }: TrainerPageProps) => {
+   const trainerId = await params;
+   const trainer = trainersData.getTrainerById(trainerId.id);
 
    if (!trainer) {
       return {
@@ -30,8 +29,9 @@ export const generateMetadata = ({ params }: TrainerPageProps) => {
    };
 };
 
-export default function TrainerPage({ params }: TrainerPageProps) {
-   const trainer = trainersData.getTrainerById(params.id);
+export default async function TrainerPage({ params }: TrainerPageProps) {
+   const trainerId = await params;
+   const trainer = trainersData.getTrainerById(trainerId.id);
 
    if (!trainer) {
       notFound();

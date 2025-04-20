@@ -1,5 +1,4 @@
 import { FacilityPageContent } from "@/types";
-import { ReactNode } from "react";
 
 // The data for the facilities page
 const facilitiesContent: FacilityPageContent = {
