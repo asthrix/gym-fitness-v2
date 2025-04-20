@@ -22,8 +22,8 @@ export function HeroSection() {
 
          <div className='container relative mx-auto px-4'>
             <div className='max-w-3xl'>
-               <h1 className='mb-6 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl'>
-                  Transform Your Body,{" "}
+               <h1 className='mb-6 text-4xl font-bold  tracking-tight md:text-5xl lg:text-7xl'>
+                  Transform Your Body, <br />
                   <span className='text-primary'>Transform Your Life</span>
                </h1>
                <p className='mb-8 text-lg text-slate-300 md:text-xl'>
@@ -35,7 +35,12 @@ export function HeroSection() {
                   <Button size='lg' asChild>
                      <Link href='/membership'>Start Your Journey</Link>
                   </Button>
-                  <Button size='lg' variant='outline' asChild>
+                  <Button
+                     size='lg'
+                     variant='outline'
+
+                     // className='text-primary/70 bg-primary/10 hover:bg-primary/20 hover:text-primary'
+                  >
                      <Link href='/classes'>Explore Classes</Link>
                   </Button>
                </div>

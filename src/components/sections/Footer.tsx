@@ -1,7 +1,101 @@
 import Link from "next/link";
 import { Dumbbell, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { footerData } from "@/data";
+import { FooterLink, FooterHours, FooterSocialLink } from "@/types/footer";
 
 export function Footer() {
+   const content = footerData.getFooterContent();
+
+   // Get the appropriate icon component
+   const getIconComponent = (iconName: string, size: number = 22) => {
+      switch (iconName) {
+         case "Dumbbell":
+            return <Dumbbell size={size} />;
+         case "Facebook":
+            return <Facebook size={size} />;
+         case "Twitter":
+            return <Twitter size={size} />;
+         case "Instagram":
+            return <Instagram size={size} />;
+         case "Youtube":
+            return <Youtube size={size} />;
+         default:
+            return null;
+      }
+   };
+
+   // Format copyright text with current year
+   const getCopyrightText = () => {
+      return content.legal.copyright.replace(
+         "{year}",
+         new Date().getFullYear().toString()
+      );
+   };
+
+   // Reusable components for DRY implementation
+   const FooterSection = ({
+      title,
+      children,
+   }: {
+      title: string;
+      children: React.ReactNode;
+   }) => (
+      <div>
+         <h3 className='mb-4 text-lg font-semibold text-white'>{title}</h3>
+         {children}
+      </div>
+   );
+
+   const SocialLinks = ({ links }: { links: FooterSocialLink[] }) => (
+      <div className='mt-6 flex space-x-4'>
+         {links.map((link) => (
+            <Link
+               key={link.name}
+               href={link.url}
+               className='hover:text-primary hover:-translate-y-1 transition-all duration-300'
+               aria-label={link.name}
+            >
+               {getIconComponent(link.icon)}
+            </Link>
+         ))}
+      </div>
+   );
+
+   const QuickLinks = ({ links }: { links: FooterLink[] }) => (
+      <ul className='space-y-2'>
+         {links.map((link) => (
+            <li key={link.href}>
+               <Link
+                  href={link.href}
+                  className='hover:text-primary transition-colors duration-200'
+               >
+                  {link.label}
+               </Link>
+            </li>
+         ))}
+      </ul>
+   );
+
+   const ContactInfo = ({ address, phone, email }: typeof content.contact) => (
+      <ul className='space-y-2'>
+         {address.map((line, index) => (
+            <li key={index}>{line}</li>
+         ))}
+         <li>{phone}</li>
+         <li>{email}</li>
+      </ul>
+   );
+
+   const BusinessHours = ({ hours }: { hours: FooterHours[] }) => (
+      <ul className='space-y-2'>
+         {hours.map((item, index) => (
+            <li key={index}>
+               <span className='font-medium'>{item.day}:</span> {item.hours}
+            </li>
+         ))}
+      </ul>
+   );
+
    return (
       <footer className='bg-slate-900 text-slate-200'>
          <div className='container mx-auto px-4 py-12'>
@@ -12,111 +106,44 @@ export function Footer() {
                      href='/'
                      className='flex items-center gap-2 font-bold text-xl text-white'
                   >
-                     <Dumbbell className='h-6 w-6' />
-                     <span>GymOn</span>
+                     {getIconComponent(content.brand.icon, 24)}
+                     <span>{content.brand.name}</span>
                   </Link>
                   <p className='mt-4 text-slate-300'>
-                     Empowering you to reach your fitness goals with expert
-                     trainers and state-of-the-art facilities.
+                     {content.brand.description}
                   </p>
-                  <div className='mt-6 flex space-x-4'>
-                     <a href='#' className='hover:text-white'>
-                        <Facebook size={20} />
-                     </a>
-                     <a href='#' className='hover:text-white'>
-                        <Twitter size={20} />
-                     </a>
-                     <a href='#' className='hover:text-white'>
-                        <Instagram size={20} />
-                     </a>
-                     <a href='#' className='hover:text-white'>
-                        <Youtube size={20} />
-                     </a>
-                  </div>
+                  <SocialLinks links={content.brand.socialLinks} />
                </div>
 
                {/* Quick Links */}
-               <div>
-                  <h3 className='mb-4 text-lg font-semibold text-white'>
-                     Quick Links
-                  </h3>
-                  <ul className='space-y-2'>
-                     <li>
-                        <Link href='/classes' className='hover:text-white'>
-                           Classes
-                        </Link>
-                     </li>
-                     <li>
-                        <Link href='/trainers' className='hover:text-white'>
-                           Trainers
-                        </Link>
-                     </li>
-                     <li>
-                        <Link href='/membership' className='hover:text-white'>
-                           Membership
-                        </Link>
-                     </li>
-                     <li>
-                        <Link href='/schedule' className='hover:text-white'>
-                           Schedule
-                        </Link>
-                     </li>
-                     <li>
-                        <Link href='/about' className='hover:text-white'>
-                           About Us
-                        </Link>
-                     </li>
-                  </ul>
-               </div>
+               <FooterSection title='Quick Links'>
+                  <QuickLinks links={content.quickLinks} />
+               </FooterSection>
 
                {/* Contact */}
-               <div>
-                  <h3 className='mb-4 text-lg font-semibold text-white'>
-                     Contact
-                  </h3>
-                  <ul className='space-y-2'>
-                     <li>123 Fitness Street</li>
-                     <li>New York, NY 10001</li>
-                     <li>+1 (555) 123-4567</li>
-                     <li>info@gymon.com</li>
-                  </ul>
-               </div>
+               <FooterSection title='Contact'>
+                  <ContactInfo {...content.contact} />
+               </FooterSection>
 
                {/* Hours */}
-               <div>
-                  <h3 className='mb-4 text-lg font-semibold text-white'>
-                     Hours
-                  </h3>
-                  <ul className='space-y-2'>
-                     <li>
-                        <span className='font-medium'>Weekdays:</span> 5:00 AM -
-                        10:00 PM
-                     </li>
-                     <li>
-                        <span className='font-medium'>Saturday:</span> 7:00 AM -
-                        8:00 PM
-                     </li>
-                     <li>
-                        <span className='font-medium'>Sunday:</span> 8:00 AM -
-                        6:00 PM
-                     </li>
-                     <li>
-                        <span className='font-medium'>Holidays:</span> 8:00 AM -
-                        4:00 PM
-                     </li>
-                  </ul>
-               </div>
+               <FooterSection title='Hours'>
+                  <BusinessHours hours={content.hours} />
+               </FooterSection>
             </div>
 
             <div className='mt-12 border-t border-slate-800 pt-6 text-center text-sm text-slate-400'>
-               <p>© {new Date().getFullYear()} GymOn. All rights reserved.</p>
+               <p>{getCopyrightText()}</p>
                <p className='mt-2'>
-                  <Link href='/privacy' className='mr-4 hover:text-slate-300'>
-                     Privacy Policy
-                  </Link>
-                  <Link href='/terms' className='hover:text-slate-300'>
-                     Terms of Service
-                  </Link>
+                  {content.legal.links.map((link, index) => (
+                     <span key={link.href}>
+                        <Link href={link.href} className='hover:text-slate-300'>
+                           {link.label}
+                        </Link>
+                        {index < content.legal.links.length - 1 && (
+                           <span className='mx-4'>·</span>
+                        )}
+                     </span>
+                  ))}
                </p>
             </div>
          </div>
