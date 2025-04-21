@@ -21,7 +21,7 @@ export function FeaturedClassesSection() {
                </p>
             </div>
 
-            <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
+            <div className='grid gap-8 sm:grid-cols-2 lg:grid-cols-3 px-4'>
                {featuredClasses.map((fitnessClass) => (
                   <ClassCard
                      key={fitnessClass.id}

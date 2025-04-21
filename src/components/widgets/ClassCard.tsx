@@ -28,7 +28,7 @@ export function ClassCard({ fitnessClass }: ClassCardProps) {
          className='absolute right-5 top-5'
          variant={
             level === "beginner"
-               ? "secondary"
+               ? "default"
                : level === "intermediate"
                ? "default"
                : "destructive"
@@ -43,7 +43,7 @@ export function ClassCard({ fitnessClass }: ClassCardProps) {
          <ContentCard.Image
             src={image}
             alt={name}
-            width={400}
+            width={500}
             height={500}
             overlay={levelBadge}
          />

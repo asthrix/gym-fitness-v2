@@ -19,7 +19,7 @@ export function ContentCardRoot({
 }: ContentCardRootProps) {
    return (
       <Card
-         className={`overflow-hidden transition-all hover:shadow-lg pt-0 gap-3 ${className}`}
+         className={`overflow-hidden justify-between transition-all hover:shadow-lg pt-0 gap-3 ${className}`}
       >
          {children}
       </Card>
