@@ -8,6 +8,7 @@ const navigationData: NavigationData = {
       { label: "Facilities", href: "/facilities" },
       { label: "Membership", href: "/membership" },
       { label: "Schedule", href: "/schedule" },
+      { label: "Contact", href: "/contact" },
    ],
    ctaButtons: [
       { label: "Log in", href: "/login", variant: "outline" },

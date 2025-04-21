@@ -5,7 +5,7 @@ import { Images } from "@/assets/images";
 
 export function HeroSection() {
    return (
-      <section className='relative bg-slate-900 py-20 text-white md:py-32'>
+      <section className='relative bg-slate-900 py-20  md:py-32'>
          {/* Background gradient */}
          <div className='absolute inset-0 bg-gradient-to-br from-indigo-900/90 to-slate-900'></div>
 
@@ -22,7 +22,7 @@ export function HeroSection() {
 
          <div className='container relative mx-auto px-4'>
             <div className='max-w-3xl'>
-               <h1 className='mb-6 text-4xl font-bold  tracking-tight md:text-5xl lg:text-7xl'>
+               <h1 className='mb-6 text-4xl font-bold text-white  tracking-tight md:text-5xl lg:text-7xl'>
                   Transform Your Body, <br />
                   <span className='text-primary'>Transform Your Life</span>
                </h1>
@@ -31,16 +31,12 @@ export function HeroSection() {
                   trainers, and a supportive community to help you reach your
                   goals.
                </p>
+
                <div className='flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0'>
                   <Button size='lg' asChild>
                      <Link href='/membership'>Start Your Journey</Link>
                   </Button>
-                  <Button
-                     size='lg'
-                     variant='outline'
-
-                     // className='text-primary/70 bg-primary/10 hover:bg-primary/20 hover:text-primary'
-                  >
+                  <Button size='lg' variant='outline' asChild>
                      <Link href='/classes'>Explore Classes</Link>
                   </Button>
                </div>

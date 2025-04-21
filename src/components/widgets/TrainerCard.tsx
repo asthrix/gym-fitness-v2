@@ -19,8 +19,8 @@ export function TrainerCard({ trainer }: TrainerCardProps) {
          <ContentCard.Image
             src={profileImage}
             alt={name}
-            width={400}
-            height={400}
+            width={500}
+            height={500}
             className='h-[20rem]'
          />
          <ContentCard.Header>

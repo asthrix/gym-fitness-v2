@@ -4,3 +4,6 @@ export * as membershipData from "./mockMemberships";
 export * as facilitiesData from "./mockFacilities";
 export * as navigationData from "./navigation";
 export * as footerData from "./mockFooter";
+export * as contactData from "./mockContact";
+export * as faqData from "./mockFAQ";
+export * as authData from "./mockAuth";
